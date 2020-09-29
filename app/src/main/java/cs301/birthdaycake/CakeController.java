@@ -47,11 +47,11 @@ public class CakeController implements CompoundButton.OnCheckedChangeListener, V
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
             //Finds where it was touched
-            double x = (double)motionEvent.getX();
-            double y = (double)motionEvent.getY();
+            int x = (int)motionEvent.getX();
+            int y = (int)motionEvent.getY();
 
-            modelOfCake.x = x;
-            modelOfCake.y = y;
+            modelOfCake.xCoord = x;
+            modelOfCake.yCoord = y;
 
             viewCake.invalidate();
             return true;
