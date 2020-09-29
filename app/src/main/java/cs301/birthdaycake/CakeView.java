@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
@@ -18,7 +19,7 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
-
+    Paint balloonPaint = new Paint();
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
@@ -63,10 +64,17 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(0xFF002366);
+        balloonPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
         this.modelOfCake = new CakeModel();
+    }
+
+    public void drawBalloon(Canvas canvas, float x, float y) {
+        canvas.drawOval(x-25,y+25,x+25,y-50, balloonPaint);
+        canvas.drawLine(x-20, y+5, x+30, y+40, cakePaint);
     }
 
     /**
@@ -105,6 +113,8 @@ public class CakeView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas)
     {
+        float xCoord = (float) modelOfCake.xCoord;
+        float yCoord = (float) modelOfCake.yCoord;
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -133,7 +143,7 @@ public class CakeView extends SurfaceView {
         }
          //   drawCandle(canvas, cakeLeft + cakeWidth/3 - candleWidth/2, cakeTop);
           //  drawCandle(canvas, cakeLeft+ cakeWidth/3*2 - candleWidth/2, cakeTop);
-
+        drawBalloon(canvas, xCoord, yCoord);
     }//onDraw
 
 }//class CakeView
