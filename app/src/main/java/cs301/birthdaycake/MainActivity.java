@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         CakeView cakeView = findViewById(R.id.cakeview);
         cakeView.setOnTouchListener(cakeController);
+
+
     }
 
     public void goodbye(View button2) {
